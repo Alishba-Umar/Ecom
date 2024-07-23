@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'shop/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Add Product</h1>
+    </header>
+    <div class="container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Product</button>
+        </form>
+        <a href="{% url 'admin_dashboard' %}" class="button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

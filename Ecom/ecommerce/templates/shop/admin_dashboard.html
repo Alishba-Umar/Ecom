@@ -1,0 +1,36 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'shop/styles.css' %}">
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <h2>Categories</h2>
+    <ul>
+        {% for category in categories %}
+            <li>{{ category.name }}
+                <a href="{% url 'edit_category' category.pk %}">Edit</a>
+                <a href="{% url 'delete_category' category.pk %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_category' %}">Add Category</a>
+
+    <h2>Products</h2>
+    <ul>
+        {% for product in products %}
+            <li>{{ product.name }} - {{ product.category.name }}
+                <a href="{% url 'edit_product' product.pk %}">Edit</a>
+                <a href="{% url 'delete_product' product.pk %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_product' %}">Add Product</a>
+    <div>
+        <a href="{% url 'index' %}" class="button">Back to Homepage</a>
+    </div>
+</body>
+</html>

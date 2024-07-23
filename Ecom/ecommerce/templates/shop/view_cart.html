@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'shop/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Shopping Cart</h1>
+    </header>
+    <div class="container">
+        <ul>
+            {% for product_id, product in cart.items %}
+                <li>
+                    {{ product.name }} - Price: {{ product.price }} - Quantity: {{ product.quantity }} - Total: {{ product.total_price }}
+                    <form method="post" action="{% url 'remove_from_cart' product_id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Remove</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'index' %}">Continue Shopping</a>
+    </div>
+</body>
+</html>

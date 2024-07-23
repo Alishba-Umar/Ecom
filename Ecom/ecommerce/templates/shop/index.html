@@ -1,0 +1,20 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shop</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'shop/styles.css' %}">
+</head>
+<body>
+    <h1>Categories</h1>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'category_products' category.id %}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% if user.is_authenticated and user.is_staff %}
+        <a href="{% url 'admin_dashboard' %}">Admin Dashboard</a>
+    {% endif %}
+</body>
+</html>

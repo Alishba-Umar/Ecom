@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ category.name }}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'shop/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>{{ category.name }}</h1>
+    </header>
+    <div class="container">
+        <ul>
+            {% for product in products %}
+                <li>
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width:100px;height:100px;">
+                    <span>{{ product.name }} - {{ product.price }}</span>
+                    <form method="post" action="{% url 'add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="1" min="1" style="width: 50px;">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'index' %}">Back to Categories</a>
+    </div>
+</body>
+</html>
